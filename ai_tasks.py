@@ -32,7 +32,7 @@ def Retrieve_models():
     print(x)
 
 
-
+#connection
 def connect_task():
     completion = client.chat.completions.create(
     model="phi3",
@@ -48,6 +48,7 @@ def connect_task():
     print(completion.choices[0].message.content)
 
 
+#switch personalities
 def persona_task():
     rp = input("a or b, pick your poison: ").lower()
     if rp != "a" and rp != "b":
@@ -82,6 +83,7 @@ def persona_task():
       print(b_completion.choices[0].message.content)
 
 
+#code explainer au natural
 def code_task_org():
     query = input("tell me, young padawan: ")
     completion = client.chat.completions.create(
@@ -99,6 +101,7 @@ def code_task_org():
     print(completion.choices[0].message.content)
 
 
+#code explainer taken from spoiler
 def code_task_cheat():
     print("\n--- Task 4: The Code Explainer ---")
 try:
@@ -114,12 +117,10 @@ try:
 except APIError as e:
     print(f"An API error occurred: {e}")
 
-def JSON_mode():
+def JSON_model():
    model = "llama3" # <-- supports JSON with prompting
 
 
-def mirror_project():
-   model = "llava-oneviosion" # <-- supports both text and images
 
 code_task_org()
 code_task_cheat()
