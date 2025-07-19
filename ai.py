@@ -30,11 +30,15 @@ def Retrieve_models():
     print(x)
 
 
-Retrieve_models()
-
 
 def connect_task():
-   model = 'phi3' # <-- small model
+    response = client.responses.create(
+        model = 'phi3', # <-- small model
+        instructions="You are a coding assistant that talks like a pirate.",
+        input= input(),
+    )
+   
+    print(response.output_text)
 
 
 def persona_task():
@@ -51,3 +55,6 @@ def JSON_mode():
 
 def mirror_project():
    model = 'llava-oneviosion' # <-- supports both text and images
+
+
+connect_task()
