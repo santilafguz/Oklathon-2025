@@ -46,7 +46,7 @@ def code_task():
 
 
 def JSON_mode():
-   model = 'llama3' # <--
+   model = 'llama3' # <-- supports JSON with prompting
 
 
 def mirror_project():
