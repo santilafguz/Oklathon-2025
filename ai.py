@@ -12,7 +12,7 @@ except (ImportError, ModuleNotFoundError):
 except userdata.SecretNotFoundError:
     raise RuntimeError("API Key not found. Please add it to Colab Secrets as 'NRP_API_KEY'.")
 
-BASE_URL = "https:llm.nrp-nautilus.io/v1"
+BASE_URL = "https://llm.nrp-nautilus.io/v1"
 client = OpenAI(
     api_key=NRP_API_KEY,
     base_url=BASE_URL
@@ -32,29 +32,33 @@ def Retrieve_models():
 
 
 def connect_task():
-    response = client.responses.create(
-        model = 'phi3', # <-- small model
-        instructions="You are a coding assistant that talks like a pirate.",
-        input= input(),
-    )
-   
-    print(response.output_text)
+    completion = client.chat.completions.create(
+    model="phi3",
+    messages=[
+        {"role": "warm individual", "content": "respond to input"},
+        {
+            "role": "user",
+            "content": input("talk to me: "),
+        },
+    ],
+)
+
+    print(completion.choices[0].message.content)
 
 
 def persona_task():
-   model = 'gemma3' # <-- google reliable
+   model = "gemma3" # <-- google reliable
 
 
 def code_task():
-   model = 'deepseek-r1' # <-- known for code
+   model = "deepseek-r1" # <-- known for code
 
 
 def JSON_mode():
-   model = 'llama3' # <-- supports JSON with prompting
+   model = "llama3" # <-- supports JSON with prompting
 
 
 def mirror_project():
-   model = 'llava-oneviosion' # <-- supports both text and images
-
+   model = "llava-oneviosion" # <-- supports both text and images
 
 connect_task()
