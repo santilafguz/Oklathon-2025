@@ -2,6 +2,7 @@ import os
 import requests
 from openai import OpenAI, APIError
 
+
 try:
     from google.colab import userdata
     NRP_API_KEY = userdata.get('NRP_API_KEY')
@@ -47,7 +48,18 @@ def connect_task():
 
 
 def persona_task():
-   model = "gemma3" # <-- google reliable
+    completion = client.chat.completions.create(
+    model = "gemma3", # <-- google reliable
+    messages=[
+        {"role": input("WHAT DO YOU WANT FROM ME!? "), "content": "respond to input"},
+        {
+            "role": "user",
+            "content": input("talk to me: "),
+        },
+    ],
+)
+
+    print(completion.choices[0].message.content)
 
 
 def code_task():
