@@ -82,7 +82,7 @@ def persona_task():
       print(b_completion.choices[0].message.content)
 
 
-def code_task():
+def code_task_org():
     query = input("tell me, young padawan: ")
     completion = client.chat.completions.create(
     model = "deepseek-r1", # <-- known for code
@@ -91,13 +91,28 @@ def code_task():
          "content": "you simply explain what code given aims to do at the most beginner level succinctly."},
         {
             "role": "user",
-            "content": f"what does this mean: {query}, Restrict your answer to maximum 5 sentences.",
+            "content": f"what does this mean: {query}, Restrict your answer to a maximum of a paragraph.",
         },
     ],
 )
 
     print(completion.choices[0].message.content)
 
+
+def code_task_cheat():
+    print("\n--- Task 4: The Code Explainer ---")
+try:
+    code_snippet = "short_names = [name for name in names if len(name) < 5]"
+    code_explanation = client.chat.completions.create(
+        model='deepseek-r1',
+        messages=[
+            {"role": "system", "content": "You are an expert Python programmer who excels at explaining complex code to beginners in simple terms."},
+            {"role": "user", "content": f"Please explain what this line of Python code does: ```{code_snippet}```"}
+        ]
+    )
+    print(code_explanation.choices[0].message.content)
+except APIError as e:
+    print(f"An API error occurred: {e}")
 
 def JSON_mode():
    model = "llama3" # <-- supports JSON with prompting
@@ -106,4 +121,5 @@ def JSON_mode():
 def mirror_project():
    model = "llava-oneviosion" # <-- supports both text and images
 
-code_task()
+code_task_org()
+code_task_cheat()
