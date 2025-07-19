@@ -49,4 +49,5 @@ def JSON_mode():
    model = 'llama3' # <--
 
 
-
+def mirror_project():
+   model = 'llava-oneviosion' # <-- supports both text and images
