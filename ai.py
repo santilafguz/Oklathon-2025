@@ -1,6 +1,7 @@
 import os
 import requests
 from openai import OpenAI, APIError
+import sys
 
 
 try:
@@ -48,10 +49,45 @@ def connect_task():
 
 
 def persona_task():
+    rp = input("a or b, pick your poison: ").lower()
+    if rp != "a" and rp != "b":
+      sys.exit("please choose persona 'a' or 'b'")
+    elif rp == "a":
+    
+      a_completion = client.chat.completions.create(
+      model= "llama3", ##**dont use google It doesn't use the same format**
+      messages=[
+          {"role": "system", "content": "respond to input as a cowboy"},
+          {
+              "role": "user",
+              "content": input("talk to me: "),
+          },
+      ],
+  )
+      print(a_completion.choices[0].message.content)
+
+    elif rp == "b":
+
+      b_completion = client.chat.completions.create(
+      model= "llama3", ##**dont use google It doesn't use the same format**
+      messages=[
+          {"role": "system", "content": "you only speak in spanish, you don't understand English, act confused."},
+          {
+              "role": "user",
+              "content": input("talk to me: "),
+          },
+      ],
+  )
+
+      print(b_completion.choices[0].message.content)
+
+
+def code_task():
     completion = client.chat.completions.create(
-    model = "gemma3", # <-- google reliable
+    model = "deepseek-r1", # <-- known for code
     messages=[
-        {"role": input("WHAT DO YOU WANT FROM ME!? "), "content": "respond to input"},
+        {"role": "Coding expert incredibly knowligable with programming", 
+         "content": "you will find bugs and inefficiencies in provided code and correct them accordingly."},
         {
             "role": "user",
             "content": input("talk to me: "),
@@ -62,10 +98,6 @@ def persona_task():
     print(completion.choices[0].message.content)
 
 
-def code_task():
-   model = "deepseek-r1" # <-- known for code
-
-
 def JSON_mode():
    model = "llama3" # <-- supports JSON with prompting
 
@@ -73,4 +105,4 @@ def JSON_mode():
 def mirror_project():
    model = "llava-oneviosion" # <-- supports both text and images
 
-connect_task()
+persona_task()
