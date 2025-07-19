@@ -31,3 +31,22 @@ def Retrieve_models():
 
 
 Retrieve_models()
+
+
+def connect_task():
+   model = 'phi3' # <-- small model
+
+
+def persona_task():
+   model = 'gemma3' # <-- google reliable
+
+
+def code_task():
+   model = 'deepseek-r1' # <-- known for code
+
+
+def JSON_mode():
+   model = 'llama3' # <--
+
+
+
