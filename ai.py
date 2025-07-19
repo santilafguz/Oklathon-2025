@@ -83,14 +83,15 @@ def persona_task():
 
 
 def code_task():
+    query = input("tell me, young padawan: ")
     completion = client.chat.completions.create(
     model = "deepseek-r1", # <-- known for code
     messages=[
-        {"role": "Coding expert incredibly knowligable with programming", 
-         "content": "you will find bugs and inefficiencies in provided code and correct them accordingly."},
+        {"role": "Coding expert", 
+         "content": "you simply explain what code given aims to do at the most beginner level succinctly."},
         {
             "role": "user",
-            "content": input("talk to me: "),
+            "content": f"what does this mean: {query}, Restrict your answer to maximum 5 sentences.",
         },
     ],
 )
@@ -105,4 +106,4 @@ def JSON_mode():
 def mirror_project():
    model = "llava-oneviosion" # <-- supports both text and images
 
-persona_task()
+code_task()
